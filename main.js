@@ -27,6 +27,15 @@ function createGrid(numberOfGrids) {
     container.appendChild(grid);
   }
   grids = document.querySelectorAll(".grid");
+  draw(grids);
+}
+
+function draw(grids) {
+  grids.forEach((grid) => {
+    grid.addEventListener("mouseenter", () => {
+      grid.style.backgroundColor = "#000"
+    });
+  });
 }
 
 createGrid(numberOfGrids);
