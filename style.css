@@ -9,6 +9,10 @@ body {
   background-size: cover;
 }
 
+.content, .sketch-pad, .container, .options {
+  display: flex;
+}
+
 .heading {
   color: #034f84;
   font-size: 64px;
@@ -17,14 +21,12 @@ body {
 }
 
 .content {
-  display: flex;
   justify-content: space-evenly;
 }
 
 /* Sketch pad / Grid */
 
 .sketch-pad{
-  display: flex;
   flex-direction: column;
 }
 
@@ -38,4 +40,10 @@ body {
   background-size: cover;
   height: 600px;
   width: 600px;
+  flex-wrap: wrap;
+}
+
+/* Options */
+.options {
+  flex-direction: column;
 }
