@@ -1,0 +1,7 @@
+body {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  min-height: 100vh;
+  margin: 0px;
+  background-image: url("img/bg.jpg");
+  background-size: cover;
+}
