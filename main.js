@@ -19,6 +19,11 @@ sizeBtn.addEventListener("click", () => {
 // Functions
 
 function createGrid(numberOfGrids) {
+  if (numberOfGrids > 100) {
+    numberOfGrids = 16;
+    alert("You can't create grid greater than 100x100");
+  }
+
   let Size = `${container.clientHeight / numberOfGrids - 2}px`;
   for (let _ = 0; _ < numberOfGrids * numberOfGrids; _++) {
     let grid = document.createElement("div");
