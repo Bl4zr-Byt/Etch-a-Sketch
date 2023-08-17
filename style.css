@@ -15,3 +15,27 @@ body {
   text-align: center;
   padding: 16px 0px;
 }
+
+.content {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+/* Sketch pad / Grid */
+
+.sketch-pad{
+  display: flex;
+  flex-direction: column;
+}
+
+.binding{
+  width: 600px;
+  height: 24px;
+}
+
+.container {
+  background-image: url("img/sketch-pad.jpg");
+  background-size: cover;
+  height: 600px;
+  width: 600px;
+}
