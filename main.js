@@ -9,6 +9,7 @@ const sizeBtn = document.querySelector(".change-size");
 const container = document.querySelector(".container");
 const defaultBtn = document.querySelector(".defaults");
 const colorChanger = document.querySelector("#change-color");
+colorChanger.value = "#000000"
 
 // Functions
 function createGrid(numberOfGrids) {
@@ -21,7 +22,7 @@ function createGrid(numberOfGrids) {
   for (let _ = 0; _ < numberOfGrids * numberOfGrids; _++) {
     let grid = document.createElement("div");
     grid.classList = "grid";
-    grid.style.cssText = `border: 1px solid #e3e3e3; height: ${Size}; width: ${Size}`;
+    grid.style.cssText = `border: 1px solid #e2e2e2; height: ${Size}; width: ${Size}`;
     container.appendChild(grid);
   }
   container.style.cursor = "crosshair";
