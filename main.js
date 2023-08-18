@@ -1,6 +1,6 @@
 // VARIABLES
 let numberOfGrids = 16; // start value for number of grids
-let color = "#000";
+let color = borderColor = "#000000";
 let grids;
 let shouldDraw;
 
@@ -9,7 +9,8 @@ let shouldDraw;
 const container = document.querySelector(".container");
 const sizeBtn = document.querySelector(".change-size");
 const defaultBtn = document.querySelector(".defaults");
-const eraseBtn = document.querySelector(".eraser")
+const eraseBtn = document.querySelector(".erase")
+const eraseAllBtn = document.querySelector(".erase-all")
 const colorChanger = document.querySelector("#change-color");
 colorChanger.value = "#000000"
 
@@ -28,7 +29,7 @@ function createGrid(numberOfGrids) {
     grid.style.cssText = `border: 1px solid #e2e2e2; height: ${Size}; width: ${Size}`;
     container.appendChild(grid);
   }
-
+  
   container.style.cursor = "crosshair";
   grids = document.querySelectorAll(".grid");
   draw();
@@ -43,7 +44,7 @@ function draw() {
   grids.forEach((grid) => {
     grid.addEventListener("mouseenter", () => {
       if (!shouldDraw) return;
-      grid.style.borderColor = color;
+      grid.style.borderColor = borderColor;
       grid.style.backgroundColor = color;
     });
   });
@@ -60,6 +61,7 @@ document.addEventListener("mouseup", () => {
 
 sizeBtn.addEventListener("click", () => {
   numberOfGrids = prompt("Enter no. of grids");
+  borderColor = color = colorChanger.value;
   createNewGrid(numberOfGrids);
 });
 
@@ -69,10 +71,15 @@ defaultBtn.addEventListener("click", () => {
 });
 
 eraseBtn.addEventListener("click", () => {
-  createNewGrid(numberOfGrids)
+  color = "#EBEBEB";
+  borderColor = "#e2e2e2";
 });
 
-colorChanger.addEventListener("input", () => color = colorChanger.value);
+eraseAllBtn.addEventListener("click", () => createNewGrid(numberOfGrids));
+
+colorChanger.addEventListener("input", () => {
+  borderColor = color = colorChanger.value
+});
 
 // Calling functions
 createGrid(numberOfGrids);
