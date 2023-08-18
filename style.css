@@ -41,8 +41,7 @@ img {
 }
 
 .container {
-  background-image: url("img/sketch-pad.jpg");
-  background-size: cover;
+  background-color: #EBEBEB;
   height: 600px;
   width: 600px;
   flex-wrap: wrap;
