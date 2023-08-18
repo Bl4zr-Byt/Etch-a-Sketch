@@ -7,6 +7,7 @@ let grids;
 const sizeBtn = document.querySelector(".change-size");
 const container = document.querySelector(".container");
 const defaultBtn = document.querySelector(".defaults");
+const colorChanger = document.querySelector("#change-color");
 
 // Functions
 function createGrid(numberOfGrids) {
@@ -34,7 +35,6 @@ function draw() {
   });
 }
 
-
 // Events
 sizeBtn.addEventListener("click", () => {
   numberOfGrids = prompt("Enter no. of grids");
@@ -44,9 +44,11 @@ sizeBtn.addEventListener("click", () => {
 
 defaultBtn.addEventListener("click", () => {
   grids.forEach((grid) => grid.remove())
-  color = "#000";
+  colorChanger.value = color = "#000000";
   createGrid(16);
 });
+
+colorChanger.addEventListener("input", () => color = colorChanger.value)
 
 // Calling functions
 createGrid(numberOfGrids);
