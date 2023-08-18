@@ -11,6 +11,7 @@ const sizeBtn = document.querySelector(".change-size");
 const defaultBtn = document.querySelector(".defaults");
 const eraseBtn = document.querySelector(".erase")
 const eraseAllBtn = document.querySelector(".erase-all")
+const selectPenBtn = document.querySelector(".pen")
 const colorChanger = document.querySelector("#change-color");
 colorChanger.value = "#000000"
 
@@ -76,6 +77,10 @@ eraseBtn.addEventListener("click", () => {
 });
 
 eraseAllBtn.addEventListener("click", () => createNewGrid(numberOfGrids));
+
+selectPenBtn.addEventListener("click", () => {
+  borderColor = color = colorChanger.value;
+});
 
 colorChanger.addEventListener("input", () => {
   borderColor = color = colorChanger.value
