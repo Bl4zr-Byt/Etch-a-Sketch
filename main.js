@@ -2,6 +2,7 @@
 let numberOfGrids = 16; // start value for number of grids
 let color = "#000";
 let grids;
+let shouldDraw;
 
 // Elements
 const sizeBtn = document.querySelector(".change-size");
@@ -20,22 +21,31 @@ function createGrid(numberOfGrids) {
   for (let _ = 0; _ < numberOfGrids * numberOfGrids; _++) {
     let grid = document.createElement("div");
     grid.classList = "grid";
-    grid.style.cssText = `border: 1px solid black; height: ${Size}; width: ${Size}`;
+    grid.style.cssText = `border: 1px solid #e3e3e3; height: ${Size}; width: ${Size}`;
     container.appendChild(grid);
   }
+  container.style.cursor = "crosshair";
   grids = document.querySelectorAll(".grid");
   draw();
 }
-
 function draw() { 
   grids.forEach((grid) => {
     grid.addEventListener("mouseenter", () => {
-      grid.style.backgroundColor = color
+      if (!shouldDraw) return;
+      grid.style.borderColor = color;
+      grid.style.backgroundColor = color;
     });
   });
 }
 
 // Events
+document.addEventListener("mousedown", () => {
+  shouldDraw = true;
+})
+document.addEventListener("mouseup", () => {
+  shouldDraw = false;
+})
+
 sizeBtn.addEventListener("click", () => {
   numberOfGrids = prompt("Enter no. of grids");
   grids.forEach((grid) => grid.remove());
