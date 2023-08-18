@@ -1,23 +1,14 @@
 // Variables
-
-let numberOfGrids = 16 // default value of grids
+let numberOfGrids = 16; // start value for number of grids
+let color = "#000";
 let grids;
 
 // Elements
-
 const sizeBtn = document.querySelector(".change-size");
 const container = document.querySelector(".container");
-
-// Logic
-
-sizeBtn.addEventListener("click", () => {
-  numberOfGrids = prompt("Enter no. of grids");
-  grids.forEach((grid) => grid.remove())
-  createGrid(numberOfGrids)
-})
+const defaultBtn = document.querySelector(".defaults");
 
 // Functions
-
 function createGrid(numberOfGrids) {
   if (numberOfGrids > 100) {
     numberOfGrids = 16;
@@ -32,15 +23,30 @@ function createGrid(numberOfGrids) {
     container.appendChild(grid);
   }
   grids = document.querySelectorAll(".grid");
-  draw(grids);
+  draw();
 }
 
-function draw(grids) {
+function draw() { 
   grids.forEach((grid) => {
     grid.addEventListener("mouseenter", () => {
-      grid.style.backgroundColor = "#000"
+      grid.style.backgroundColor = color
     });
   });
 }
 
+
+// Events
+sizeBtn.addEventListener("click", () => {
+  numberOfGrids = prompt("Enter no. of grids");
+  grids.forEach((grid) => grid.remove());
+  createGrid(numberOfGrids);
+})
+
+defaultBtn.addEventListener("click", () => {
+  grids.forEach((grid) => grid.remove())
+  color = "#000";
+  createGrid(16);
+});
+
+// Calling functions
 createGrid(numberOfGrids);
