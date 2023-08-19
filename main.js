@@ -2,7 +2,7 @@
 let numberOfGrids = 16; // start value for number of grids
 let color = borderColor = "#000000";
 let grids;
-let shouldDraw;
+let shouldDraw = false;
 
 
 // ELEMENTS
@@ -33,41 +33,36 @@ function createGrid(numberOfGrids) {
   
   container.style.cursor = "crosshair";
   grids = document.querySelectorAll(".grid");
-  draw();
+  grids.forEach((grid) => {
+    grid.addEventListener("mouseover", draw)
+    grid.addEventListener("mousedown", draw)
+  })
 }
+createGrid(numberOfGrids);
 
 function createNewGrid(numberOfGrids) {
   grids.forEach((grid) => grid.remove());
   createGrid(numberOfGrids)
 }
 
-function draw() { 
-  grids.forEach((grid) => {
-    grid.addEventListener("mouseenter", () => {
-      if (!shouldDraw) return;
-      grid.style.borderColor = borderColor;
-      grid.style.backgroundColor = color;
-    });
-  });
+function draw(e) {
+  if (e.type == "mouseover" && !shouldDraw) return;
+  e.target.style.borderColor = borderColor; 
+  e.target.style.backgroundColor = color; 
 }
 
 
 // EVENTS
-document.addEventListener("mousedown", () => {
-  shouldDraw = true;
-});
-document.addEventListener("mouseup", () => {
-  shouldDraw = false;
-});
+container.addEventListener("mousedown", () => shouldDraw = true);
+container.addEventListener("mouseup", () => shouldDraw = false);
 
 sizeBtn.addEventListener("click", () => {
   numberOfGrids = prompt("Enter no. of grids");
-  borderColor = color = colorChanger.value;
   createNewGrid(numberOfGrids);
 });
 
 defaultBtn.addEventListener("click", () => {
-  colorChanger.value = color = "#000000";
+  colorChanger.value = borderColor = color = "#000000";
   createNewGrid(16);
 });
 
@@ -75,16 +70,7 @@ eraseBtn.addEventListener("click", () => {
   color = "#EBEBEB";
   borderColor = "#e2e2e2";
 });
-
 eraseAllBtn.addEventListener("click", () => createNewGrid(numberOfGrids));
 
-selectPenBtn.addEventListener("click", () => {
-  borderColor = color = colorChanger.value;
-});
-
-colorChanger.addEventListener("input", () => {
-  borderColor = color = colorChanger.value
-});
-
-// Calling functions
-createGrid(numberOfGrids);
+selectPenBtn.addEventListener("click", () => borderColor = color = colorChanger.value);
+colorChanger.addEventListener("input", () => borderColor = color = colorChanger.value);
