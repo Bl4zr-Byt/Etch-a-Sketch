@@ -58,7 +58,7 @@ container.addEventListener("mouseup", () => shouldDraw = false);
 
 sizeBtn.addEventListener("click", () => {
   numberOfGrids = prompt("Enter no. of grids");
-  createNewGrid(numberOfGrids);
+  if (!isNaN(numberOfGrids) && numberOfGrids) createNewGrid(numberOfGrids); 
 });
 
 defaultBtn.addEventListener("click", () => {
