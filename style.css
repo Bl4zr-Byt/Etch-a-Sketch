@@ -48,10 +48,9 @@ img {
 }
 
 /* Options */
-.option-btn, .color-picker {
+.option-btn, .pickers {
   border: 2px solid black;
   border-radius: 12px;
-  width: 96px;
 }
 
 .options {
@@ -68,25 +67,34 @@ img {
 
 .option-btn {
   height: 36px;
+  width: 96px;
 }
 
-.option-btn:hover, .color-picker:hover {
+.option-btn:hover, .pickers:hover {
   background-color: #f4e1d2;
   color: #034f84;
   font-weight: bold;
   border-color: #92a8d1;
 }
 
-.color-picker {
+.pickers {
   background-color: white;
   text-align: center;
   padding: 8px;
-  height: 52px;
+  height: 128px;
+  width: 128px;
 }
 
-#change-color {
+.color-picker, .bg-picker {
+  padding: 4px;
+}
+
+#change-color, #bg-changer {
   padding: 0px;
   border: 0px;
-  margin-top: 6px;
   width: 96px;
+}
+
+.bg-picker {
+  border-top: 2px dashed black;
 }
