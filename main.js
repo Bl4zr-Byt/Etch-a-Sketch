@@ -3,6 +3,8 @@ let numberOfGrids = 16; // start value for number of grids
 let color = "#000000";
 let grids;
 let shouldDraw = false;
+let enableRainbowPen = false;
+let enableMagicPen = false;
 
 
 // ELEMENTS
@@ -13,6 +15,8 @@ const eraseBtn = document.querySelector(".erase");
 const eraseAllBtn = document.querySelector(".erase-all")
 const selectPenBtn = document.querySelector(".pen")
 const colorChanger = document.querySelector("#color-changer");
+const rainbowBtn = document.querySelector(".rainbow")
+const magicBtn = document.querySelector(".magic")
 colorChanger.value = "#000000";
 
 
@@ -49,8 +53,21 @@ function createNewGrid(numberOfGrids) {
 
 function draw(e) {
   if (e.type == "mouseover" && !shouldDraw) return;
+
+
+  if (enableRainbowPen) color = borderColor = getRandomRGBValue();
+  if (enableMagicPen) e.target.style.opacity = +e.target.style.opacity + 0.1;
+  else e.target.style.opacity = 1
+
   e.target.style.borderColor = borderColor; 
-  e.target.style.backgroundColor = color; 
+  e.target.style.backgroundColor = color;
+}
+
+function getRandomRGBValue() {
+  let r = Math.round(Math.random(255) * 255)
+  let g = Math.round(Math.random(255) * 255)
+  let b = Math.round(Math.random(255) * 255)
+  return `rgb(${r}, ${g}, ${b})`;
 }
 
 // EVENTS
@@ -63,15 +80,23 @@ sizeBtn.addEventListener("click", () => {
 });
 
 defaultBtn.addEventListener("click", () => {
+  enableMagicPen = enableRainbowPen = false;
   colorChanger.value = color = "#000000";
   createNewGrid(16);
 });
 
 eraseBtn.addEventListener("click", () => {
+  enableMagicPen = enableRainbowPen = false;
   borderColor = "#e2e2e2";
   color = "transparent";
 });
 eraseAllBtn.addEventListener("click", () => createNewGrid(numberOfGrids));
 
 selectPenBtn.addEventListener("click", () => borderColor = color = colorChanger.value);
-colorChanger.addEventListener("input", () => borderColor = color = colorChanger.value);
+colorChanger.addEventListener("input", () => {
+  enableRainbowPen = false;
+  borderColor = color = colorChanger.value
+});
+
+rainbowBtn.addEventListener("click", () => enableRainbowPen = true);
+magicBtn.addEventListener("click", () => enableMagicPen = true);
