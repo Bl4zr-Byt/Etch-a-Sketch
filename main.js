@@ -1,6 +1,6 @@
 // VARIABLES
 let numberOfGrids = 16; // start value for number of grids
-let color = borderColor = "#000000";
+let color = "#000000";
 let grids;
 let shouldDraw = false;
 
@@ -9,19 +9,20 @@ let shouldDraw = false;
 const container = document.querySelector(".container");
 const sizeBtn = document.querySelector(".change-size");
 const defaultBtn = document.querySelector(".defaults");
-const eraseBtn = document.querySelector(".erase")
+const eraseBtn = document.querySelector(".erase");
 const eraseAllBtn = document.querySelector(".erase-all")
 const selectPenBtn = document.querySelector(".pen")
 const colorChanger = document.querySelector("#color-changer");
-const bgChanger = document.querySelector("#bg-changer")
-colorChanger.value = "#000000"
+colorChanger.value = "#000000";
 
 
 // FUNCTIONS
 function createGrid(numberOfGrids) {
-  if (numberOfGrids > 100) {
+
+  // if works
+  if (numberOfGrids > 100 || numberOfGrids < 4) {
     numberOfGrids = 16;
-    alert("You can't create grid greater than 100x100");
+    alert("You can't create grid greater than 100x100 & less than 4x4");
   }
 
   let Size = `${container.clientHeight / numberOfGrids - 2}px`;
@@ -32,12 +33,12 @@ function createGrid(numberOfGrids) {
     container.appendChild(grid);
   }
   
-  container.style.cursor = "crosshair";
   grids = document.querySelectorAll(".grid");
   grids.forEach((grid) => {
     grid.addEventListener("mouseover", draw)
     grid.addEventListener("mousedown", draw)
   })
+  borderColor = color;
 }
 createGrid(numberOfGrids);
 
@@ -52,7 +53,6 @@ function draw(e) {
   e.target.style.backgroundColor = color; 
 }
 
-
 // EVENTS
 container.addEventListener("mousedown", () => shouldDraw = true);
 container.addEventListener("mouseup", () => shouldDraw = false);
@@ -63,7 +63,7 @@ sizeBtn.addEventListener("click", () => {
 });
 
 defaultBtn.addEventListener("click", () => {
-  colorChanger.value = borderColor = color = "#000000";
+  colorChanger.value = color = "#000000";
   createNewGrid(16);
 });
 
@@ -75,4 +75,3 @@ eraseAllBtn.addEventListener("click", () => createNewGrid(numberOfGrids));
 
 selectPenBtn.addEventListener("click", () => borderColor = color = colorChanger.value);
 colorChanger.addEventListener("input", () => borderColor = color = colorChanger.value);
-bgChanger.addEventListener("input", () => container.style.backgroundColor = bgChanger.value);
