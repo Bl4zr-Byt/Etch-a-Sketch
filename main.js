@@ -72,7 +72,7 @@ function getRandomRGBValue() {
 
 // EVENTS
 container.addEventListener("mousedown", () => shouldDraw = true);
-container.addEventListener("mouseup", () => shouldDraw = false);
+document.addEventListener("mouseup", () => shouldDraw = false);
 
 sizeBtn.addEventListener("click", () => {
   numberOfGrids = prompt("Enter no. of grids");
