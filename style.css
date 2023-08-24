@@ -72,10 +72,9 @@ button, .color-picker {
 }
 
 button:hover, .color-picker:hover {
-  background-color: #f4e1d2;
-  color: #034f84;
-  font-weight: bold;
-  border-color: #92a8d1;
+  background-color: #61A9F5;
+  font-weight: bolder;
+  border-color: #006eff;
 }
 
 .color-picker {
@@ -84,6 +83,11 @@ button:hover, .color-picker:hover {
   padding: 8px;
   height: 48px;
   width: 112px;
+}
+
+.color-picker:hover {
+  background-color: #73E156;
+  border-color: #1c8b00;
 }
 
 #color-changer{
@@ -96,4 +100,9 @@ button:hover, .color-picker:hover {
 .styles{
   width: 112px;
   height: 42px;
+}
+
+.styles:hover {
+  background-color: #ECB422;
+  border-color: #996e00;
 }
