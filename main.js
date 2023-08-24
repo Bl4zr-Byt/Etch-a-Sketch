@@ -19,6 +19,7 @@ const rainbowBtn = document.querySelector(".rainbow")
 const magicBtn = document.querySelector(".magic")
 const clearStyleBtn = document.querySelector(".clear-style")
 colorChanger.value = "#000000";
+selectPenBtn.style.cssText = "background-color: #61A9F5; font-weight: bolder; border-color: #006eff;"
 
 
 // FUNCTIONS
@@ -49,7 +50,7 @@ createGrid(numberOfGrids);
 
 function createNewGrid(numberOfGrids) {
   grids.forEach((grid) => grid.remove());
-  createGrid(numberOfGrids)
+  createGrid(Number(numberOfGrids))
 }
 
 function draw(e) {
@@ -70,12 +71,26 @@ function getRandomRGBValue() {
   return `rgb(${r}, ${g}, ${b})`;
 }
 
+function setBgOnClick(e) {
+  selectPenBtn.style.cssText = "none";
+  eraseBtn.style.cssText = "none";
+  rainbowBtn.style.cssText = "none";
+  magicBtn.style.cssText = "none";
+  
+  if (e.target.classList.contains("pen") || e.target.classList.contains("erase")) e.target.style.cssText = "background-color: #61A9F5; border-color: #006eff;"
+
+  if (e.target.classList.contains("rainbow") || e.target.classList.contains("magic")) e.target.style.cssText = "background-color: #ECB422; border-color: #996e00;"
+
+  e.target.style.fontWeight = "bolder";
+}
+
 // EVENTS
 container.addEventListener("mousedown", () => shouldDraw = true);
 document.addEventListener("mouseup", () => shouldDraw = false);
 
 sizeBtn.addEventListener("click", () => {
   numberOfGrids = prompt("Enter no. of grids");
+  console.log(typeof(numberOfGrids))
   if (!isNaN(numberOfGrids) && numberOfGrids) createNewGrid(numberOfGrids); 
 });
 
@@ -85,21 +100,34 @@ defaultBtn.addEventListener("click", () => {
   createNewGrid(16);
 });
 
-eraseBtn.addEventListener("click", () => {
+eraseBtn.addEventListener("click", (e) => {
+  setBgOnClick(e)
   enableMagicPen = enableRainbowPen = false;
   borderColor = "#e2e2e2";
   color = "transparent";
 });
+
 eraseAllBtn.addEventListener("click", () => createNewGrid(numberOfGrids));
 
-selectPenBtn.addEventListener("click", () => borderColor = color = colorChanger.value);
+selectPenBtn.addEventListener("click", (e) => {
+  setBgOnClick(e)
+  borderColor = color = colorChanger.value
+});
+
 colorChanger.addEventListener("input", () => {
   enableRainbowPen = false;
   borderColor = color = colorChanger.value
 });
 
-rainbowBtn.addEventListener("click", () => enableRainbowPen = true);
-magicBtn.addEventListener("click", () => enableMagicPen = true);
+rainbowBtn.addEventListener("click", (e) => {
+  setBgOnClick(e)
+  enableRainbowPen = true
+});
+magicBtn.addEventListener("click", (e) => {
+  setBgOnClick(e)
+  enableMagicPen = true
+});
+
 clearStyleBtn.addEventListener("click", () => {
   enableRainbowPen = enableMagicPen = false;
   color = borderColor = colorChanger.value
