@@ -17,6 +17,7 @@ const selectPenBtn = document.querySelector(".pen")
 const colorChanger = document.querySelector("#color-changer");
 const rainbowBtn = document.querySelector(".rainbow")
 const magicBtn = document.querySelector(".magic")
+const clearStyleBtn = document.querySelector(".clear-style")
 colorChanger.value = "#000000";
 
 
@@ -54,10 +55,9 @@ function createNewGrid(numberOfGrids) {
 function draw(e) {
   if (e.type == "mouseover" && !shouldDraw) return;
 
-
   if (enableRainbowPen) color = borderColor = getRandomRGBValue();
   if (enableMagicPen) e.target.style.opacity = +e.target.style.opacity + 0.1;
-  else e.target.style.opacity = 1
+  else e.target.style.opacity = 1;
 
   e.target.style.borderColor = borderColor; 
   e.target.style.backgroundColor = color;
@@ -100,3 +100,7 @@ colorChanger.addEventListener("input", () => {
 
 rainbowBtn.addEventListener("click", () => enableRainbowPen = true);
 magicBtn.addEventListener("click", () => enableMagicPen = true);
+clearStyleBtn.addEventListener("click", () => {
+  enableRainbowPen = enableMagicPen = false;
+  color = borderColor = colorChanger.value
+})
