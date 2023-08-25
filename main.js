@@ -58,7 +58,7 @@ function draw(e) {
 
   if (enableRainbowPen) color = borderColor = getRandomRGBValue();
   if (enableMagicPen) e.target.style.opacity = +e.target.style.opacity + 0.1;
-  else e.target.style.opacity = 1;
+  else e.target.style.opacity = "";
 
   e.target.style.borderColor = borderColor; 
   e.target.style.backgroundColor = color;
@@ -82,6 +82,7 @@ function setBgOnClick(e) {
   if (e.target.classList.contains("rainbow") || e.target.classList.contains("magic")) e.target.style.cssText = "background-color: #ECB422; border-color: #996e00;"
 
   e.target.style.fontWeight = "bolder";
+  if (e.target.classList.contains("clear-style")) return;
 }
 
 // EVENTS
@@ -90,7 +91,6 @@ document.addEventListener("mouseup", () => shouldDraw = false);
 
 sizeBtn.addEventListener("click", () => {
   numberOfGrids = prompt("Enter no. of grids");
-  console.log(typeof(numberOfGrids))
   if (!isNaN(numberOfGrids) && numberOfGrids) createNewGrid(numberOfGrids); 
 });
 
@@ -101,17 +101,17 @@ defaultBtn.addEventListener("click", () => {
 });
 
 eraseBtn.addEventListener("click", (e) => {
-  setBgOnClick(e)
   enableMagicPen = enableRainbowPen = false;
   borderColor = "#e2e2e2";
   color = "transparent";
+  setBgOnClick(e)
 });
 
 eraseAllBtn.addEventListener("click", () => createNewGrid(numberOfGrids));
 
 selectPenBtn.addEventListener("click", (e) => {
-  setBgOnClick(e)
   borderColor = color = colorChanger.value
+  setBgOnClick(e)
 });
 
 colorChanger.addEventListener("input", () => {
@@ -120,15 +120,17 @@ colorChanger.addEventListener("input", () => {
 });
 
 rainbowBtn.addEventListener("click", (e) => {
-  setBgOnClick(e)
   enableRainbowPen = true
+  setBgOnClick(e)
 });
 magicBtn.addEventListener("click", (e) => {
-  setBgOnClick(e)
+  borderColor = color = colorChanger.value
   enableMagicPen = true
+  setBgOnClick(e)
 });
 
-clearStyleBtn.addEventListener("click", () => {
+clearStyleBtn.addEventListener("click", (e) => {
   enableRainbowPen = enableMagicPen = false;
   color = borderColor = colorChanger.value
+  setBgOnClick(e)
 })
