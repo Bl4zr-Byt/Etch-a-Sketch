@@ -90,14 +90,16 @@ container.addEventListener("mousedown", () => shouldDraw = true);
 document.addEventListener("mouseup", () => shouldDraw = false);
 
 sizeBtn.addEventListener("click", () => {
-  numberOfGrids = prompt("Enter no. of grids");
-  if (!isNaN(numberOfGrids) && numberOfGrids) createNewGrid(numberOfGrids); 
+  numberOfGridsNew = prompt("Enter no. of grids");
+  if (!isNaN(numberOfGridsNew) && numberOfGridsNew) createNewGrid(numberOfGridsNew); 
 });
 
-defaultBtn.addEventListener("click", () => {
+defaultBtn.addEventListener("click", (e) => {
   enableMagicPen = enableRainbowPen = false;
   colorChanger.value = color = "#000000";
   createNewGrid(16);
+  setBgOnClick(e)
+  selectPenBtn.style.cssText = "background-color: #61A9F5; font-weight: bolder; border-color: #006eff;"
 });
 
 eraseBtn.addEventListener("click", (e) => {
